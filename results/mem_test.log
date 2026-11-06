@@ -1,0 +1,55 @@
+4b899fc20e33614f9aa2c863baee184bfa289671b42f2200692949add9ebc73a
+ready; docker stats after load: 568MiB / 1GiB
+request 1 -> HTTP 200
+request 2 -> HTTP 200
+request 3 -> HTTP 200
+request 4 -> HTTP 200
+request 5 -> HTTP 200
+request 6 -> HTTP 200
+request 7 -> HTTP 200
+request 8 -> HTTP 200
+request 9 -> HTTP 200
+request 10 -> HTTP 200
+request 11 -> HTTP 200
+request 12 -> HTTP 200
+request 13 -> HTTP 200
+request 14 -> HTTP 200
+request 15 -> HTTP 200
+request 16 -> HTTP 200
+request 17 -> HTTP 200
+request 18 -> HTTP 200
+request 19 -> HTTP 200
+request 20 -> HTTP 200
+request 21 -> HTTP 200
+request 22 -> HTTP 200
+request 23 -> HTTP 200
+request 24 -> HTTP 200
+request 25 -> HTTP 200
+request 26 -> HTTP 200
+request 27 -> HTTP 500
+request 28 -> HTTP 200
+request 29 -> HTTP 200
+request 30 -> HTTP 200
+request 31 -> HTTP 200
+request 32 -> HTTP 200
+request 33 -> HTTP 200
+request 34 -> HTTP 200
+request 35 -> HTTP 200
+request 36 -> HTTP 200
+request 37 -> HTTP 200
+request 38 -> HTTP 200
+request 39 -> HTTP 200
+request 40 -> HTTP 200
+request 41 -> HTTP 200
+request 42 -> HTTP 200
+request 43 -> HTTP 200
+request 44 -> HTTP 200
+request 45 -> HTTP 200
+request 46 -> HTTP 200
+request 47 -> HTTP 200
+request 48 -> HTTP 200
+request 49 -> HTTP 200
+request 50 -> HTTP 200
+samples=107  PEAK MEMORY = 796.4 MiB (limit 1024 MiB)
+successful responses: 49/50
+OOMKilled=false ExitCode=0 Running=true

@@ -2,7 +2,7 @@
 # Task 3: run the image with 1 CPU / 1 GiB, send 50 requests one after another, record peak memory.
 # Needs SeaweedFS reachable on the host (make up) and models/v1 uploaded. Output -> results/mem_test.log
 set -uo pipefail
-mkdir -p results; LOG=results/mem_test.log; : > "$LOG"
+mkdir -p results; LOG=${LOG:-results/mem_test.log}; : > "$LOG"
 . .secrets/s3.env
 docker rm -f cp-mem >/dev/null 2>&1
 docker run -d --name cp-mem --cpus 1 --memory 1g --memory-swap 1g \
@@ -16,7 +16,7 @@ echo "ready; docker stats after load: $(docker stats --no-stream --format '{{.Me
 SAMPLER=$!; : > /tmp/memsamples.txt
 ok=0
 for i in $(seq 1 50); do
-  t=$(sed -n "$((i % 100 + 1))p" data/validation.jsonl | python3 -c "import sys,json;print(json.loads(sys.stdin.read())['text'])")
+  t=$(sed -n "$(((i + ${START:-0}) % 100 + 1))p" data/validation.jsonl | python3 -c "import sys,json;print(json.loads(sys.stdin.read())['text'])")
   code=$(curl -s -o /dev/null -w '%{http_code}' -XPOST localhost:18000/parse -H 'content-type: application/json' \
          -d "$(python3 -c "import json,sys;print(json.dumps({'text':sys.argv[1]}))" "$t")")
   echo "request $i -> HTTP $code" >> "$LOG"; [ "$code" = 200 ] && ok=$((ok+1))
