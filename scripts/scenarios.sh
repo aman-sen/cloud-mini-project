@@ -18,6 +18,7 @@ wait_ready() { kubectl -n app wait --for=condition=available deploy/cmdparser --
 probe() { curl -si -XPOST $HOST/parse -H 'content-type: application/json' -d '{"text":"what is the weather in london"}' | grep -iE '^(HTTP|x-model|x-served|\{)'; }
 
 baseline() {      # Task 7 standard run
+  kubectl -n app scale deploy/cmdparser --replicas=2
   wait_ready; kubectl -n app get pods -o wide > results/baseline_pods.txt
   S=$(top_sampler baseline); locust_run loadtest 2m; kill $S
   cp results/loadtest_stats.csv results/baseline_stats.csv 2>/dev/null || true
@@ -61,6 +62,8 @@ hpa() {           # 1 -> 2 under load, back to 1 when idle
   kubectl -n app describe hpa cmdparser > results/hpa_describe.txt
 }
 coldstart() {
+  kubectl -n app scale deploy/cmdparser --replicas=2
+  rm -f results/coldstart_runs.json results/coldstart_logs.txt
   : > results/coldstart.log
   for run in 1 2 3; do
     kubectl -n app delete pods -l app=cmdparser --wait=true >/dev/null
