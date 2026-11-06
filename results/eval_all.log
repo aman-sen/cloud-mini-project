@@ -1,0 +1,68 @@
+.venv/bin/python scripts/predict.py teacher --out results/teacher_predictions.jsonl
+wrote results/teacher_predictions.jsonl
+.venv/bin/python scripts/predict.py base    --out results/base_predictions.jsonl
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+wrote results/base_predictions.jsonl
+.venv/bin/python scripts/predict.py student --model models/v1 --out results/student_v1_predictions.jsonl
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+wrote results/student_v1_predictions.jsonl
+.venv/bin/python scripts/predict.py student --model models/v2 --out results/student_v2_predictions.jsonl
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+wrote results/student_v2_predictions.jsonl
+python3 tools/score.py results/teacher_predictions.jsonl data/validation.jsonl --out results/teacher_validation.json | tee results/teacher_score.txt
+{
+  "json_validity": 100.0,
+  "intent_accuracy": 87.0,
+  "date_accuracy": 83.0,
+  "time_accuracy": 86.0,
+  "place_accuracy": 91.0,
+  "full_frame": 57.0,
+  "examples": 100,
+  "missing_predictions": 0
+}
+python3 tools/score.py results/base_predictions.jsonl data/validation.jsonl --out results/base_validation.json | tee results/base_score.txt
+{
+  "json_validity": 0.0,
+  "intent_accuracy": 0.0,
+  "date_accuracy": 0.0,
+  "time_accuracy": 0.0,
+  "place_accuracy": 0.0,
+  "full_frame": 0.0,
+  "examples": 100,
+  "missing_predictions": 0
+}
+python3 tools/score.py results/student_v1_predictions.jsonl data/validation.jsonl --out results/student_v1_validation.json | tee results/student_v1_score.txt
+{
+  "json_validity": 99.0,
+  "intent_accuracy": 86.0,
+  "date_accuracy": 82.0,
+  "time_accuracy": 89.0,
+  "place_accuracy": 85.0,
+  "full_frame": 54.0,
+  "examples": 100,
+  "missing_predictions": 0
+}
+python3 tools/score.py results/student_v2_predictions.jsonl data/validation.jsonl --out results/student_v2_validation.json | tee results/student_v2_score.txt
+{
+  "json_validity": 100.0,
+  "intent_accuracy": 79.0,
+  "date_accuracy": 78.0,
+  "time_accuracy": 88.0,
+  "place_accuracy": 84.0,
+  "full_frame": 45.0,
+  "examples": 100,
+  "missing_predictions": 0
+}
+make eval-all  440.57s user 85.99s system 160% cpu 5:28.73 total
