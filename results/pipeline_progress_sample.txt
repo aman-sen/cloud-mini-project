@@ -1,0 +1,6 @@
+[pod/teacher-labelling-0-ncrc9/worker] [0] 1125/1500  3131s
+[pod/teacher-labelling-0-ncrc9/worker] [0] 1150/1500  3240s
+[pod/teacher-labelling-0-ncrc9/worker] [0] 1175/1500  3355s
+[pod/teacher-labelling-1-kd6pl/worker] [1] 1125/1500  3137s
+[pod/teacher-labelling-1-kd6pl/worker] [1] 1150/1500  3246s
+[pod/teacher-labelling-1-kd6pl/worker] [1] 1175/1500  3361s
