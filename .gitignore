@@ -1,0 +1,11 @@
+.venv/
+.secrets/
+__pycache__/
+*.pyc
+models/
+*.safetensors
+*.bin
+*.tar.gz
+.pytest_cache/
+.ruff_cache/
+locust*.html

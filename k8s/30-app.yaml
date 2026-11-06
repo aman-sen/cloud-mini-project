@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: cmdparser, namespace: app, labels: {app: cmdparser}}
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: {maxSurge: 1, maxUnavailable: 0}   # a new Pod must be Ready before an old one stops
+  selector: {matchLabels: {app: cmdparser}}
+  template:
+    metadata: {labels: {app: cmdparser}}
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: cmdparser
+          image: cmdparser:1.0
+          imagePullPolicy: IfNotPresent
+          ports: [{containerPort: 8000, name: http}]
+          env:
+            - {name: MODEL_URI, value: "s3://models/v1/"}
+            - {name: MODEL_VERSION, value: "v1"}
+            - {name: S3_ENDPOINT, value: "http://seaweedfs-s3.data.svc.cluster.local:8333"}
+            - {name: MAX_NEW_TOKENS, value: "64"}
+            - {name: POD_NAME, valueFrom: {fieldRef: {fieldPath: metadata.name}}}
+            - name: S3_ACCESS_KEY
+              valueFrom: {secretKeyRef: {name: s3-credentials, key: S3_ACCESS_KEY}}
+            - name: S3_SECRET_KEY
+              valueFrom: {secretKeyRef: {name: s3-credentials, key: S3_SECRET_KEY}}
+          resources:
+            requests: {cpu: 500m, memory: 768Mi}
+            limits: {cpu: "1", memory: 1Gi}
+          livenessProbe:
+            httpGet: {path: /healthz, port: 8000}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:      # 503 until the model is downloaded and loaded -> no traffic before that
+            httpGet: {path: /readyz, port: 8000}
+            initialDelaySeconds: 2
+            periodSeconds: 2
+            failureThreshold: 1
+          lifecycle:
+            preStop: {exec: {command: ["sleep", "5"]}}   # let the ingress drop the Pod first
+---
+apiVersion: v1
+kind: Service
+metadata: {name: cmdparser, namespace: app}
+spec:
+  selector: {app: cmdparser}
+  ports: [{name: http, port: 80, targetPort: 8000}]
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cmdparser
+  namespace: app
+spec:
+  ingressClassName: traefik
+  rules:
+    - http:
+        paths:
+          - path: /parse
+            pathType: Prefix
+            backend: {service: {name: cmdparser, port: {number: 80}}}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: {name: cmdparser, namespace: app}
+spec:
+  scaleTargetRef: {apiVersion: apps/v1, kind: Deployment, name: cmdparser}
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:
+    - type: Resource
+      resource: {name: cpu, target: {type: Utilization, averageUtilization: 70}}
+  behavior:
+    scaleDown: {stabilizationWindowSeconds: 60}   # shortened from the 300 s default for the demo

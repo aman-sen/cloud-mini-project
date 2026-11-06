@@ -1,0 +1,6 @@
+models/
+results/
+.git/
+.secrets/
+*.safetensors
+*.bin

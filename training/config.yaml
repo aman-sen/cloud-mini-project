@@ -1,0 +1,20 @@
+# All training hyper-parameters live here; `make train` reads only this file.
+base_model: EleutherAI/pythia-70m
+version: v1
+seed: 42
+learning_rate: 0.0003
+batch_size: 8
+epochs: 6
+max_seq_len: 96          # tokens of "Command: ...\nJSON: ...<eos>"; longer examples are truncated
+weight_decay: 0.01
+warmup_ratio: 0.05
+train_file: data/train.jsonl   # first 1,500 records of the cleaned dataset are used
+max_examples: 1500
+output_dir: models/v1
+loss_csv: training/loss.csv
+library_versions:
+  python: "3.11"
+  torch: "2.5.1"
+  transformers: "4.46.3"
+  numpy: "1.26.4"
+  pyyaml: "6.0.2"

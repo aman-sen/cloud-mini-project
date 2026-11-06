@@ -1,0 +1,3 @@
+title = "repo gitleaks config"
+[extend]
+useDefault = true
