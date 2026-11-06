@@ -1,0 +1,3 @@
+NAME                         READY   STATUS    RESTARTS   AGE
+cmdparser-865bc6c6fd-hc44r   1/1     Running   0          81m
+cmdparser-865bc6c6fd-xmjbx   1/1     Running   0          7s

@@ -1,0 +1,4 @@
+Hourly cost = 2 replicas x (1 vCPU x 3.5 + 1 GiB x 0.45) = 7.9000 INR/h
+Requests per hour = 0.8825900245885248 req/s x 3600 = 3177.3
+Cost per 1000 requests = 7.9000 / 3177.3 x 1000 = 2.4864 INR
+SLO 99% success over one run: 104 requests -> error budget = 104 x 0.01 = 1.0 requests; failures = 1; budget used = 96.2%

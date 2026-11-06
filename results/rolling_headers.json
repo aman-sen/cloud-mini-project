@@ -1,0 +1,14 @@
+{
+  "per_replica": {
+    "cmdparser-865bc6c6fd-vxmzw": 26,
+    "cmdparser-865bc6c6fd-298c7": 25,
+    "cmdparser-84d685856d-b79nm": 20,
+    "cmdparser-84d685856d-jw2xp": 17,
+    "cmdparser-865bc6c6fd-hc44r": 65,
+    "cmdparser-865bc6c6fd-5jb7q": 65
+  },
+  "per_model_version": {
+    "v1": 181,
+    "v2": 37
+  }
+}

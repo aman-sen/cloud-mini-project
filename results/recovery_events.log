@@ -1,0 +1,39 @@
+before:
+NAME                         READY   STATUS    RESTARTS   AGE
+cmdparser-865bc6c6fd-5jb7q   1/1     Running   0          3m43s
+cmdparser-865bc6c6fd-hc44r   1/1     Running   0          3m51s
+deleting pod/cmdparser-865bc6c6fd-5jb7q at 15:38:25
+pod "cmdparser-865bc6c6fd-5jb7q" deleted from app namespace
+t+4s: cmdparser   1/2   2     1     40m
+t+8s: cmdparser   1/2   2     1     40m
+t+12s: cmdparser   2/2   2     2     40m
+t+16s: cmdparser   2/2   2     2     40m
+t+20s: cmdparser   2/2   2     2     40m
+t+24s: cmdparser   2/2   2     2     40m
+t+28s: cmdparser   2/2   2     2     40m
+t+32s: cmdparser   2/2   2     2     40m
+t+36s: cmdparser   2/2   2     2     40m
+t+40s: cmdparser   2/2   2     2     40m
+t+44s: cmdparser   2/2   2     2     40m
+t+48s: cmdparser   2/2   2     2     40m
+t+52s: cmdparser   2/2   2     2     40m
+t+56s: cmdparser   2/2   2     2     41m
+t+60s: cmdparser   2/2   2     2     41m
+t+64s: cmdparser   2/2   2     2     41m
+t+68s: cmdparser   2/2   2     2     41m
+t+72s: cmdparser   2/2   2     2     41m
+t+76s: cmdparser   2/2   2     2     41m
+t+80s: cmdparser   2/2   2     2     41m
+t+84s: cmdparser   2/2   2     2     41m
+t+88s: cmdparser   2/2   2     2     41m
+t+92s: cmdparser   2/2   2     2     41m
+t+96s: cmdparser   2/2   2     2     41m
+t+100s: cmdparser   2/2   2     2     41m
+t+104s: cmdparser   2/2   2     2     41m
+t+108s: cmdparser   2/2   2     2     41m
+t+112s: cmdparser   2/2   2     2     41m
+t+116s: cmdparser   2/2   2     2     42m
+t+120s: cmdparser   2/2   2     2     42m
+NAME                         READY   STATUS    RESTARTS   AGE
+cmdparser-865bc6c6fd-gbmcq   1/1     Running   0          2m5s
+cmdparser-865bc6c6fd-hc44r   1/1     Running   0          5m56s

@@ -1,0 +1,4 @@
+HTTP/1.1 200 OK
+X-Model-Version: v2
+X-Served-By: cmdparser-84d685856d-jw2xp
+{"intent":"weather_query","date":null,"time":null,"place":"london"}

@@ -1,0 +1,3 @@
+NAME                         READY   STATUS    RESTARTS   AGE     IP           NODE                    NOMINATED NODE   READINESS GATES
+cmdparser-865bc6c6fd-hc44r   1/1     Running   0          84m     10.42.0.29   k3d-cloudlab-server-0   <none>           <none>
+cmdparser-865bc6c6fd-xmjbx   1/1     Running   0          3m30s   10.42.0.33   k3d-cloudlab-server-0   <none>           <none>
