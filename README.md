@@ -3,7 +3,7 @@
 **Student:** Aman Sen  **Roll number:** 230101026
 **GitHub repository:** https://github.com/aman-sen/cloud-mini-project   (final submission commit is tagged `final`)
 **Model release (weights, tokenizer, version info, checksums):** https://github.com/aman-sen/cloud-mini-project/releases/tag/v1.0
-**Failed quality-gate CI run (untrained model):** `<LINK TO FAILED GITHUB ACTIONS RUN>`
+**Failed quality-gate CI run (untrained model):** https://github.com/aman-sen/cloud-mini-project/actions/runs/42193689236
 
 Pipeline: `phi3.5` (teacher, Ollama) labels 3,000 commands → 2 parallel workers on k3d write shards to SeaweedFS → `clean.py` → first 1,500 records → sequence-level distillation of `EleutherAI/pythia-70m` (CPU) → model in object storage → FastAPI service (image has no weights) → k3d Deployment + Service + Ingress + HPA.
 

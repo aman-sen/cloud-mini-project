@@ -8,8 +8,8 @@ for v in v1 v2; do
   [ -f "models/$v/model.safetensors" ] && { echo "models/$v present"; continue; }
   mkdir -p "models/$v" /tmp/dl
   base="https://github.com/$REPO/releases/download/$TAG"
-  curl -fsSL -o "/tmp/dl/model-$v.tar.gz" "$base/model-$v.tar.gz"
-  curl -fsSL -o "/tmp/dl/model-$v.sha256" "$base/model-$v.sha256"
+  curl -fSL --retry 10 --retry-all-errors -C - -o "/tmp/dl/model-$v.tar.gz" "$base/model-$v.tar.gz"
+  curl -fSL --retry 10 --retry-all-errors -C - -o "/tmp/dl/model-$v.sha256" "$base/model-$v.sha256"
   exp=$(cut -d' ' -f1 "/tmp/dl/model-$v.sha256"); got=$(sha256sum "/tmp/dl/model-$v.tar.gz" | cut -d' ' -f1)
   [ "$exp" = "$got" ] || { echo "CHECKSUM MISMATCH for $v"; exit 1; }
   tar -xzf "/tmp/dl/model-$v.tar.gz" -C "models/$v"

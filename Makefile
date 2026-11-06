@@ -1,13 +1,14 @@
 # Targets: up, down, train, train-v2, package, pipeline, eval-*, test, lint, mem-test, loadtest, scenarios
 SHELL := /bin/bash
 CONFIG ?= training/config.yaml
+PYTHON ?= $(shell command -v python3.11 || command -v python3.12 || command -v python3.10 || echo python3)
 VENV := .venv
 PY := $(VENV)/bin/python
 RELEASE_TAG ?= v1.0
 export S3_ENDPOINT ?= http://localhost:8333
 
 $(VENV)/.ready: training/requirements.txt
-	python3 -m venv $(VENV)
+	$(PYTHON) -m venv $(VENV)
 	$(VENV)/bin/pip install -q -r training/requirements.txt
 	touch $@
 
